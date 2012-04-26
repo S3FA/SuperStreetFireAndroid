@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="arena_bg">#fff</color>
+	<color name="emitter_outline">#000</color>
+	<color name="healthbar_bg">#ddd</color>
+	<color name="healthbar">#7AE01B</color>
+	
+	<color name="ringmaster">#00f</color>
+	<color name="player_one">#0f0</color>
+	<color name="player_two">#f00</color>
+	
+	<color name="black">#000</color>
+	<color name="grey">#888</color>
+</resources>

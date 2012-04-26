@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Super Street Fire</string>
+    <string name="tab_arena">Arena</string>
+    <string name="tab_debug">Debug</string>
+    <string name="tab_prefs">Prefs</string>
+    
+    <string name="ringmaster">Ringmaster</string>
+    <string name="player_one">Player One</string>
+    <string name="player_two">Player Two</string>
+    
+    <string name="enable_pallet_mode">Enable</string>
+    <string name="disable_pallet_mode">Disable</string>
+</resources>
