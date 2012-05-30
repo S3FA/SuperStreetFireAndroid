@@ -1,12 +1,11 @@
-package ca.site3.ssf.android;
+package ca.site3.ssf.android.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-
-import com.superstreetfire.android.R;
+import ca.site3.ssf.android.R;
 
 public class NyanView extends LinearLayout {
 	

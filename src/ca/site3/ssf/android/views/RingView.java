@@ -1,4 +1,4 @@
-package ca.site3.ssf.android;
+package ca.site3.ssf.android.views;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +8,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
-
-import com.superstreetfire.android.R;
+import ca.site3.ssf.android.R;
 
 /**
  * Displays the Ring and player health bars
@@ -42,7 +40,7 @@ public class RingView extends SurfaceView {
 	int emitterRadius = 10;
 	
 	// Does touching an emitter cause it to fire?
-	boolean isInDrawMode = false;
+	public boolean isInDrawMode = false;
 	
 	public RingView(Context context) {
 		super(context);
@@ -177,8 +175,6 @@ public class RingView extends SurfaceView {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (!isInDrawMode) return true; // touching an emitter does nothing
-        float x = event.getX();
-        float y = event.getY();
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_MOVE:
@@ -187,7 +183,6 @@ public class RingView extends SurfaceView {
         		}
             	for (int p = 0; p < event.getPointerCount(); p++) {
                     touch_move(event.getX(p), event.getY(p));
-
                 }
                 break;
             case MotionEvent.ACTION_UP:

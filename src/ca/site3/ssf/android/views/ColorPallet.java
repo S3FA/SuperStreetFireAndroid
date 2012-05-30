@@ -1,16 +1,14 @@
-package ca.site3.ssf.android;
+package ca.site3.ssf.android.views;
 
 import android.content.Context;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
-import com.superstreetfire.android.R;
+import ca.site3.ssf.android.R;
 
 public class ColorPallet extends LinearLayout {
 	
@@ -84,11 +82,11 @@ public class ColorPallet extends LinearLayout {
 		TextView colorName;
 	}
 	
-	abstract class OnColorSelect {
+	public abstract class OnColorSelect {
 		public abstract void onSelect(int newColor);
 	}
 	
-	abstract class OnDrawModeChange {
+	public abstract class OnDrawModeChange {
 		public abstract void onModeChange(boolean isInDrawMode);
 	}
 }
