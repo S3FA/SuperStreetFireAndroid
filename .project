@@ -3,6 +3,9 @@
 	<name>SuperStreetFireAndroid</name>
 	<comment></comment>
 	<projects>
+		<project>GameModel</project>
+		<project>GUIProtocol</project>
+		<project>SSF-Common</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

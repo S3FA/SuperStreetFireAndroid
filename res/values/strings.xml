@@ -3,6 +3,7 @@
     <string name="app_name">Super Street Fire</string>
     
     <string name="tab_arena">Arena</string>
+    <string name="tab_text">Text</string>
     <string name="tab_server">Server</string>
     
     <string name="ringmaster">Ringmaster</string>
@@ -13,4 +14,11 @@
     <string name="disable_pallet_mode">Disable</string>
     
     <string name="next_state">Next State</string>
+    <string name="kill_game">Kill Game</string>
+    <string name="pause">Pause</string>
+    <string name="test_system">Test System</string>
+    
+    <string name="connect">Connect</string>
+    <string name="server_address">Server Address</string>
+    <string name="server_port">Server Port</string>
 </resources>

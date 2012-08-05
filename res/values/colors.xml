@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="arena_bg">#fff</color>
-	<color name="emitter_outline">#000</color>
-	<color name="healthbar_bg">#ddd</color>
+	<color name="arena_bg">#000</color>
+	<color name="emitter_outline">#aaa</color>
+	<color name="emitter_active">#aaa</color>
+	<color name="healthbar_bg">#666</color>
+	<color name="other_bg">#222</color>
 	<color name="healthbar">#7AE01B</color>
+	<color name="healthbar_text">#99ffffff</color>
+	<color name="focusbar">#a0f</color>
+	<color name="meditationbar">#f0a</color>
 	
 	<color name="ringmaster">#00f</color>
 	<color name="player_one">#0f0</color>
 	<color name="player_two">#f00</color>
 	
-	<color name="black">#000</color>
-	<color name="grey">#888</color>
+	<color name="round_border">#00000000</color>
+	<color name="round_border_active">#aaa</color>
+	<color name="round_background">#333</color>
+	
+	<color name="color_pallet_inactive">#aaa</color>
+	<color name="color_pallet_active">#fff</color>
+	
+	<color name="transparent">#00000000</color>
 </resources>

@@ -6,6 +6,7 @@ import java.net.UnknownHostException;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 import ca.site3.ssf.guiprotocol.StreetFireGuiClient;
 
 public class SSFApi {
@@ -19,7 +20,6 @@ public class SSFApi {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		Log.e("superstreetfire", clientAddress.toString());
 		client = new StreetFireGuiClient(clientAddress, clientPort);
 		(new ConnectTask()).execute();
     }
@@ -28,18 +28,38 @@ public class SSFApi {
     	return client;
     }
     
+    public void queryRefresh() {
+    	Log.e("ssf", "queryRefresh()");
+    	if (client != null && client.isConnected()) {
+    		(new GameRefreshTask()).execute();
+    	}
+    }
+    
     private class ConnectTask extends AsyncTask<Void, Void, Void> {
-
-		@Override
 		protected Void doInBackground(Void... arg0) {
 			try {
 				client.connect();
 				Log.e(LOG_TAG, "isConnected: " + client.isConnected());
+				// FIXME need user feedback on connection status
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			return null;
 		}
-    	
+		
+		protected void onPostExecute(Void nothing) {
+			
+		}
     }
+
+	private class GameRefreshTask extends AsyncTask<Void, Void, Void> {
+		protected Void doInBackground(Void... arg0) {
+			try {
+				client.queryGameInfoRefresh();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		return null;
+	}
+}
 }

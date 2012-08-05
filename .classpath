@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="lib" path="/Users/kate/Desktop/protobuf-2.4.1/java/target/protobuf-java-2.4.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/kate/Downloads/slf4j-1.6.6/slf4j-api-1.6.6.jar"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/GameModel"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/GUIProtocol"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SSF-Common"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>

@@ -46,9 +46,9 @@ public class ColorPallet extends LinearLayout {
 				if (onColorSelect == null) return;
 				onColorSelect.onSelect((Integer)v.getTag());
 				for (ViewRow view : views) {
-					view.colorName.setTextColor(getResources().getColor(R.color.grey));
+					view.colorName.setTextColor(getResources().getColor(R.color.color_pallet_inactive));
 				}
-				((TextView)v.findViewById(R.id.name)).setTextColor(getResources().getColor(R.color.black));
+				((TextView)v.findViewById(R.id.name)).setTextColor(getResources().getColor(R.color.color_pallet_active));
 			}
 		};
 		

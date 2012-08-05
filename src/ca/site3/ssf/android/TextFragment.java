@@ -5,14 +5,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
-import ca.site3.ssf.android.R;
-
-public class ServerFragment extends Fragment {
+public class TextFragment extends Fragment {
+	WebView text;
 	
 	@Override
 	public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.debug, null);
+		View view = inflater.inflate(R.layout.text, null);
+
+		text = (WebView)view.findViewById(R.id.text);
+		text.loadUrl("file:///android_asset/text.html"); 
 		
 		return view;
 	}
