@@ -36,6 +36,13 @@ public class SSFApplication extends Application {
 	
 	BlockingQueue<FireEmitterChangedEvent> fireEvents = new LinkedBlockingQueue<FireEmitterChangedEvent>();
 	
+	SSFApplication instance;
+	
+	public SSFApplication getInstance() {
+		if (instance == null) instance = this;
+		return instance;
+	}
+	
     private class EventTask extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected Void doInBackground(Void... arg0) {
@@ -59,6 +66,7 @@ public class SSFApplication extends Application {
 			case FIRE_EMITTER_CHANGED:
 				// consumed by ArenaFragment
 				fireEvents.add((FireEmitterChangedEvent)event);
+				Log.e("ssf", "emitter change queued, count: " + fireEvents.size());
 				break;
 			case GAME_STATE_CHANGED:
 				intent = new Intent(Intents.EVENT_GAME_STATE_CHANGED);
@@ -81,9 +89,8 @@ public class SSFApplication extends Application {
 			case ROUND_PLAY_TIMER_CHANGED:
 				intent = new Intent(Intents.EVENT_TIMER_CHANGE);
 				break;
-		default:
-//			assert(false);
-			break;
+			default:
+				break;
 		}
 		if (intent != null) {
 			intent.putExtra(Intents.EXTRA_EVENT, event);

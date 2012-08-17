@@ -1,9 +1,6 @@
 package ca.site3.ssf.android;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.EnumSet;
-import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
 import android.app.Fragment;
@@ -26,7 +23,6 @@ import ca.site3.ssf.gamemodel.FireEmitterChangedEvent;
 import ca.site3.ssf.gamemodel.GameInfoRefreshEvent;
 import ca.site3.ssf.gamemodel.GameState;
 import ca.site3.ssf.gamemodel.GameStateChangedEvent;
-import ca.site3.ssf.gamemodel.GameState.GameStateType;
 import ca.site3.ssf.gamemodel.IGameModel.Entity;
 import ca.site3.ssf.gamemodel.IGameModelEvent;
 import ca.site3.ssf.gamemodel.PlayerAttackActionEvent;
@@ -234,13 +230,16 @@ public class ArenaFragment extends Fragment {
     private class FireEmitterChangedTask extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected Void doInBackground(Void... arg0) {
-			BlockingQueue<FireEmitterChangedEvent> q = ((SSFApplication)getActivity().getApplication()).fireEvents;
+			Log.e("ssg", "starting consumer");
+			BlockingQueue<FireEmitterChangedEvent> q = ((SSFApplication)getActivity().getApplication()).getInstance().fireEvents;
 			try {
 				while (true) {
+					Log.e("ssg", "emitter change consumed");
 					ringView.handleFireEmitterEvent(q.take());
 				}
-			} catch (InterruptedException ex) {
-				Log.e("DevGUI interrupted while waiting for game model event", ex.toString());
+			} catch (InterruptedException e) {
+				Log.e("ssf", "consumer died");
+				Log.e("ssf", e.toString());
 			}
 			return null;
 		}

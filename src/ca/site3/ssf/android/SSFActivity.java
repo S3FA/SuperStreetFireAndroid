@@ -23,7 +23,6 @@ public class SSFActivity extends Activity {
 	
     ArenaFragment arenaDisplayFragment;
     TextFragment textFragment;
-    ServerDialogFragment serverDebugFragment;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,6 @@ public class SSFActivity extends Activity {
         
         arenaDisplayFragment = new ArenaFragment();
         textFragment = new TextFragment();
-        serverDebugFragment = new ServerDialogFragment();
         
         final ActionBar bar = getActionBar();
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -92,10 +90,8 @@ public class SSFActivity extends Activity {
     	filter.addAction(Intents.EVENT_PLAYER_HEALTH_CHANGE);
     	filter.addAction(Intents.EVENT_PLAYER_ATTACK_ACTION);
     	filter.addAction(Intents.EVENT_PLAYER_BLOCK_ACTION);
-    	filter.addAction(Intents.EVENT_FIRE_EMITTER_CHANGED);
     	filter.addAction(Intents.EVENT_TIMER_CHANGE);
     	filter.addAction(Intents.EVENT_GAME_INFO_REFRESH);
-    	filter.addAction(Intents.EVENT_PLAYER_ATTACK_ACTION);
     	filter.addAction(Intents.EVENT_GAME_STATE_CHANGED);
     	registerReceiver(onGameEvent, filter);
     	sendBroadcast(new Intent(Intents.REFRESH));
