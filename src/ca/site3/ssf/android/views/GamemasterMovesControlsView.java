@@ -10,6 +10,14 @@ import ca.site3.ssf.gamemodel.ActionFactory.ActionType;;
 
 public class GamemasterMovesControlsView extends LinearLayout {
 	public OnPlayerActionSelect onPlayerActionSelect;
+	
+	int[] ids = {R.id.half_left,
+			R.id.half_right,
+			R.id.jab_left,
+			R.id.jab_right,
+			R.id.eruption,
+			R.id.hadouken,
+			R.id.random};
 
 	public GamemasterMovesControlsView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -21,14 +29,6 @@ public class GamemasterMovesControlsView extends LinearLayout {
 		
 		View view = inflater.inflate(R.layout.gamemaster_moves, null);
 		addView(view);
-		
-		int[] ids = {R.id.half_left,
-				R.id.half_right,
-				R.id.jab_left,
-				R.id.jab_right,
-				R.id.eruption,
-				R.id.hadouken,
-				R.id.random};
 		
 		MoveDescription[] moves = {
 				new MoveDescription(ActionType.RINGMASTER_HALF_RING_ACTION, true, false),
@@ -53,6 +53,15 @@ public class GamemasterMovesControlsView extends LinearLayout {
 			View button = findViewById(ids[i]);
 			button.setTag(moves[i]);
 			button.setOnClickListener(buttonClick);
+		}
+	}
+	
+	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		for (int id : ids) {
+			View button = findViewById(id);
+			button.setEnabled(enabled);
 		}
 	}
 	
