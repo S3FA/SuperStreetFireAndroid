@@ -32,6 +32,7 @@ import ca.site3.ssf.gamemodel.RoundEndedEvent;
 import ca.site3.ssf.gamemodel.RoundPlayTimerChangedEvent;
 
 public class ArenaFragment extends Fragment {
+	private static String LOG_TAG = "ssf";
 
 	// TODO devices connect w/ battery status
 	// Battery status - is this in the IOServer yet?
@@ -141,6 +142,10 @@ public class ArenaFragment extends Fragment {
 		
 		roundsView = (GameRoundsView) view.findViewById(R.id.rounds);
 		
+		// Controls will be enabled after we connect if we are in an appropriate game state
+		this.gamemasterControls.setEnabled(false);
+		this.colorPallet.setEnabled(false);
+		
 		task = new FireEmitterChangedTask();
 		task.execute();
 
@@ -230,23 +235,23 @@ public class ArenaFragment extends Fragment {
     private class FireEmitterChangedTask extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected Void doInBackground(Void... arg0) {
-			Log.e("ssg", "starting consumer");
+			Log.e(LOG_TAG, "starting consumer");
 			BlockingQueue<FireEmitterChangedEvent> q = ((SSFApplication)getActivity().getApplication()).getInstance().fireEvents;
 			try {
 				while (true) {
-					Log.e("ssg", "emitter change consumed");
+					Log.e(LOG_TAG, "emitter change consumed");
 					ringView.handleFireEmitterEvent(q.take());
 				}
 			} catch (InterruptedException e) {
-				Log.e("ssf", "consumer died");
-				Log.e("ssf", e.toString());
+				Log.e(LOG_TAG, "consumer died");
+				Log.e(LOG_TAG, e.toString());
 			}
 			return null;
 		}
     }
     
 	private void setEnableActionControls(boolean enabledPlayerControls, boolean enabledRingmasterControls) {
-		this.gamemasterControls.setVisibility(enabledRingmasterControls ? View.VISIBLE : View.GONE);
-		this.colorPallet.setVisibility(enabledRingmasterControls ? View.VISIBLE : View.GONE);
+		this.gamemasterControls.setEnabled(enabledRingmasterControls);
+		this.colorPallet.setEnabled(enabledRingmasterControls);
 	}
 }
