@@ -12,6 +12,7 @@ public class Intents {
 	public static final String KILL_GAME = PREFIX + "KILL_GAME";
 	public static final String PAUSE_TOGGLE = PREFIX + "PAUSE_TOGGLE";
 	public static final String TEST_SYSTEM = PREFIX + "TEST_SYSTEM";
+	public static final String STOP = PREFIX + "STOP";
 	public static final String CONNECT = PREFIX + "CONNECT";
 	public static final String REFRESH = PREFIX + "REFRESH";
 	public static final String TOUCH_EMITTER = PREFIX + "TOUCH_EMITTER";

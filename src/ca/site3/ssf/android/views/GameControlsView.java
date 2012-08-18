@@ -25,6 +25,11 @@ public class GameControlsView extends LinearLayout {
 	Button pauseButton;
 	Button testSystem;
 	
+	/**
+	 * Emergency stop
+	 */
+	Button stopButton;
+	
 	public List<GameStateType> nextStates = new ArrayList<GameStateType>(2);
 
 	public GameControlsView(Context context, AttributeSet attrs) {
@@ -45,30 +50,40 @@ public class GameControlsView extends LinearLayout {
 			}
 		};
 		
+		// The next state buttons are hidden until we know what the next states are
+		
 		nextStateButton1 = (Button)view.findViewById(R.id.next_state_1);
-		nextStateButton1.setText(R.string.next_state);
 		nextStateButton1.setTag(Intents.INIT_NEXT_1);
 		nextStateButton1.setOnClickListener(onButtonClick);
+		nextStateButton1.setEnabled(false);
 		
 		nextStateButton2 = (Button)view.findViewById(R.id.next_state_2);
-		nextStateButton2.setText(R.string.next_state);
 		nextStateButton2.setTag(Intents.INIT_NEXT_2);
 		nextStateButton2.setOnClickListener(onButtonClick);
+		nextStateButton2.setEnabled(false);
 		
 		killButton = (Button)view.findViewById(R.id.kill_game);
 		killButton.setText(R.string.kill_game);
 		killButton.setTag(Intents.KILL_GAME);
 		killButton.setOnClickListener(onButtonClick);
+		killButton.setEnabled(false);
 		
 		pauseButton = (Button)view.findViewById(R.id.pause_toggle);
 		pauseButton.setText(R.string.pause);
 		pauseButton.setTag(Intents.PAUSE_TOGGLE);
 		pauseButton.setOnClickListener(onButtonClick);
+		pauseButton.setEnabled(false);
 		
 		testSystem = (Button)view.findViewById(R.id.test_system);
 		testSystem.setText(R.string.test_system);
 		testSystem.setTag(Intents.TEST_SYSTEM);
 		testSystem.setOnClickListener(onButtonClick);
+		testSystem.setEnabled(false);
+		
+		stopButton = (Button)view.findViewById(R.id.stop);
+		stopButton.setTag(Intents.STOP);
+		stopButton.setOnClickListener(onButtonClick);
+		stopButton.setEnabled(false);
 
 		this.addView(view);
 	}
@@ -96,6 +111,10 @@ public class GameControlsView extends LinearLayout {
 			List<GameStateType> nextGoToStates = stateType.nextControllableGoToStates();
 			assert(nextGoToStates != null);
 			assert(nextGoToStates.size() <= 2);
+			
+			testSystem.setEnabled(true);
+			killButton.setEnabled(true);
+			stopButton.setEnabled(true);
 			
 			this.nextStates = new ArrayList<GameStateType>(nextGoToStates);	
 			Collections.copy(this.nextStates, nextGoToStates);
@@ -125,17 +144,17 @@ public class GameControlsView extends LinearLayout {
 					assert(false);
 					break;
 				}
-				this.nextStateButton2.setVisibility(View.VISIBLE); //true
+				this.nextStateButton2.setVisibility(View.VISIBLE);
 				this.nextStateButton2.setEnabled(true);
 			}
 			else {
-				this.nextStateButton2.setVisibility(View.GONE); //false
+				this.nextStateButton2.setVisibility(View.GONE);
 				this.nextStateButton2.setEnabled(false);
 			}
 		}
 		else {
 			this.nextStateButton1.setEnabled(false);
-			this.nextStateButton2.setVisibility(View.GONE); //false
+			this.nextStateButton2.setVisibility(View.GONE);
 			this.nextStateButton2.setEnabled(false);
 		}
 	}

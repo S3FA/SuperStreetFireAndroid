@@ -153,6 +153,8 @@ public class SSFApplication extends Application {
     	        		api.client.killGame();
     	        	} else if (intent.getAction() == Intents.TEST_SYSTEM) {
     	        		api.client.testSystem();
+    	        	} else if (intent.getAction() == Intents.STOP) {
+    	        		// FIXME actually ask the server to stop
     	        	}
     	        }
             } catch (Exception e) {
