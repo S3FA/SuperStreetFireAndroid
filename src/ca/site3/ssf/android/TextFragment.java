@@ -15,7 +15,9 @@ public class TextFragment extends Fragment {
 		View view = inflater.inflate(R.layout.text, null);
 
 		text = (WebView)view.findViewById(R.id.text);
-		text.loadUrl("file:///android_asset/text.html"); 
+		text.loadUrl("file:///android_asset/text.html");
+		text.setBackgroundColor(getResources().getColor(R.color.arena_bg));
+		text.setVisibility(View.VISIBLE);
 		
 		return view;
 	}
