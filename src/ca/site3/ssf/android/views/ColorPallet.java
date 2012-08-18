@@ -20,6 +20,8 @@ public class ColorPallet extends LinearLayout {
 	
 	public OnColorSelect onColorSelect;
 	public OnDrawModeChange onDrawModeChange;
+	
+	private static final float DISABLED_TRANSPARANCY = (float)0.4;
 
 	public ColorPallet(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -43,7 +45,7 @@ public class ColorPallet extends LinearLayout {
 		View.OnClickListener colorClick = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (onColorSelect == null) return;
+				if (onColorSelect == null || !isEnabled()) return;
 				onColorSelect.onSelect((Integer)v.getTag());
 				for (ViewRow view : views) {
 					view.colorName.setTextColor(getResources().getColor(R.color.color_pallet_inactive));
@@ -75,6 +77,16 @@ public class ColorPallet extends LinearLayout {
 		}
 		
 		this.addView(buttonToggleDrawMode);
+	}
+	
+	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		buttonToggleDrawMode.setEnabled(enabled);
+		for (ViewRow view : views) {
+			view.color.setAlpha(enabled ? (float)1: DISABLED_TRANSPARANCY);
+			view.colorName.setAlpha(enabled ? (float)1: DISABLED_TRANSPARANCY);
+		}
 	}
 	
 	private class ViewRow {
