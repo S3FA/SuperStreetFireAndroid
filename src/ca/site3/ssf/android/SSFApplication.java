@@ -3,8 +3,8 @@ package ca.site3.ssf.android;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.EnumSet;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 import android.app.Application;
 import android.content.BroadcastReceiver;
@@ -32,9 +32,9 @@ public class SSFApplication extends Application {
 	public static final String PREF_SERVER_ADDRESS = "server_address";
 	public static final String PREF_SERVER_PORT = "server_port";
 	public static final int DEFAULT_PORT = 31337;
-	public static final String DEFAULT_IP = "10.0.1.3";//"192.168.100.2";
+	public static final String DEFAULT_IP = "192.168.100.10";
 	
-	BlockingQueue<FireEmitterChangedEvent> fireEvents = new LinkedBlockingQueue<FireEmitterChangedEvent>();
+	BlockingQueue<FireEmitterChangedEvent> fireEvents = new ArrayBlockingQueue<FireEmitterChangedEvent>(32);
 	
 	SSFApplication instance;
 	
@@ -46,9 +46,11 @@ public class SSFApplication extends Application {
     private class EventTask extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected Void doInBackground(Void... arg0) {
+			Log.e("ssf", "EventTask started");
 			while (true) {
 				try {
 					IGameModelEvent event = api.getClient().getEventQueue().take();
+					Log.e("ssf", event.toString());
 					handleGameModelEvent(event);
 				} catch (InterruptedException ex) {
 					Log.e("DevGUI interrupted while waiting for game model event", ex.toString());
@@ -58,6 +60,7 @@ public class SSFApplication extends Application {
     }
 	
 	private void handleGameModelEvent(final IGameModelEvent event) {
+		Log.e("ssf", "event: " + event.toString());
 		Intent intent = null;
 		switch (event.getType()) {
 			case GAME_INFO_REFRESH:
@@ -85,6 +88,7 @@ public class SSFApplication extends Application {
 				break;
 			case ROUND_ENDED:
 				intent = new Intent(Intents.EVENT_ROUND_ENDED);
+				break;
 			case ROUND_BEGIN_TIMER_CHANGED:
 			case ROUND_PLAY_TIMER_CHANGED:
 				intent = new Intent(Intents.EVENT_TIMER_CHANGE);
@@ -127,13 +131,15 @@ public class SSFApplication extends Application {
     	        int port = prefs.getInt(PREF_SERVER_PORT, DEFAULT_PORT);
     	        if (port == 0) port = DEFAULT_PORT;
     	        Log.e("ssf", "address: " + InetAddress.getByName(address) + " port: " + port);
-    	        api = new SSFApi(address, port);
+    	        api = new SSFApi(address, port, getBaseContext());
+    	        Toast.makeText(getBaseContext(), "Connect to server", Toast.LENGTH_LONG).show();
+    	        api.queryRefresh();
             } catch (Exception e) {
             	e.printStackTrace();
-            	Toast.makeText(context, "Unable to connect", Toast.LENGTH_LONG);
+            	Toast.makeText(getBaseContext(), "Unable to connect", Toast.LENGTH_LONG).show();
             }
             
-            fireEvents = new LinkedBlockingQueue<FireEmitterChangedEvent>();
+            fireEvents = new ArrayBlockingQueue<FireEmitterChangedEvent>(64);
             task = new EventTask();
     		task.execute();
         }
