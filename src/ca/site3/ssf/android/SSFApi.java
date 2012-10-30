@@ -4,23 +4,26 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 import ca.site3.ssf.guiprotocol.StreetFireGuiClient;
 
 public class SSFApi {
 	public static final String LOG_TAG = SSFApi.class.getName();
     StreetFireGuiClient client;
+    Context context;
     
-    public SSFApi(String address, int clientPort) {
+    public SSFApi(String address, int clientPort, Context context) {
     	InetAddress clientAddress = null;
 		try {
 			clientAddress = InetAddress.getByName(address);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		client = new StreetFireGuiClient(clientAddress, clientPort);
+		this.context = context;
+		client = new StreetFireGuiClient(clientAddress, clientPort, false);
 		(new ConnectTask()).execute();
     }
     
@@ -29,7 +32,6 @@ public class SSFApi {
     }
     
     public void queryRefresh() {
-    	Log.e("ssf", "queryRefresh()");
     	if (client != null && client.isConnected()) {
     		(new GameRefreshTask()).execute();
     	}
@@ -45,10 +47,6 @@ public class SSFApi {
 				e.printStackTrace();
 			}
 			return null;
-		}
-		
-		protected void onPostExecute(Void nothing) {
-			
 		}
     }
 
