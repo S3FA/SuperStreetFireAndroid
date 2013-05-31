@@ -9,14 +9,14 @@
     <View
         android:id="@+id/border"
         android:background="@color/round_border"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         />
     <View
         android:id="@+id/color"
         android:background="@color/round_background"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="5dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="4dp"
         />
 </FrameLayout>
