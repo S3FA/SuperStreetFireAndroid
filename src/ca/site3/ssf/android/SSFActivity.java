@@ -40,9 +40,6 @@ public class SSFActivity extends Activity {
         final ActionBar bar = getActionBar();
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         bar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
-        
-        DialogFragment newFragment = new ServerDialogFragment();
-        newFragment.show(getFragmentManager(), "dialog");
 
         bar.addTab(bar.newTab()
                 .setText(R.string.tab_arena)

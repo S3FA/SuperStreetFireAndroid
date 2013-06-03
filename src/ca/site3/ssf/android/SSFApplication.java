@@ -116,6 +116,8 @@ public class SSFApplication extends Application {
         registerReceiver(onFlameTouch, filter);
         filter = new IntentFilter(Intents.EVENT_GAMEMASTER_MOVE);
         registerReceiver(onGamemasterAction, filter);
+        // Try to connect to the saved server when the application is opened
+        sendBroadcast(new Intent(Intents.CONNECT));
     }
     
     private BroadcastReceiver onConnect = new BroadcastReceiver() {
