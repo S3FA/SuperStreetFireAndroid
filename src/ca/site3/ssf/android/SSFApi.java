@@ -5,7 +5,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import ca.site3.ssf.guiprotocol.StreetFireGuiClient;
@@ -41,8 +40,7 @@ public class SSFApi {
 		protected Void doInBackground(Void... arg0) {
 			try {
 				client.connect();
-				Log.e(LOG_TAG, "isConnected: " + client.isConnected());
-				// FIXME need user feedback on connection status
+				Log.i(LOG_TAG, "isConnected: " + client.isConnected());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
