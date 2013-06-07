@@ -21,4 +21,7 @@
     <string name="connect">Connect</string>
     <string name="server_address">Server Address</string>
     <string name="server_port">Server Port</string>
+    
+    <string name="status_disconnected">Not Connected</string>
+    <string name="status_connected">Connected</string>
 </resources>

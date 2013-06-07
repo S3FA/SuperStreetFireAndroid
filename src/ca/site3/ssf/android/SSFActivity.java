@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 import ca.site3.ssf.gamemodel.IGameModelEvent;
 
 public class SSFActivity extends Activity {
@@ -23,6 +24,8 @@ public class SSFActivity extends Activity {
 	
     ArenaFragment arenaDisplayFragment;
     TextFragment textFragment;
+    
+    View connectionStatusView;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,7 +94,14 @@ public class SSFActivity extends Activity {
     	filter.addAction(Intents.EVENT_GAME_INFO_REFRESH);
     	filter.addAction(Intents.EVENT_GAME_STATE_CHANGED);
     	registerReceiver(onGameEvent, filter);
+    	filter = new IntentFilter();
+    	filter.addAction(Intents.CONNECTED);
+    	filter.addAction(Intents.NOT_CONNECTED);
+    	registerReceiver(onConnectionStatus, filter);
     	sendBroadcast(new Intent(Intents.REFRESH));
+
+        // Try to connect to the saved server when the application is opened
+        sendBroadcast(new Intent(Intents.CONNECT));
     }
     
     public void onPause() {
@@ -106,11 +116,27 @@ public class SSFActivity extends Activity {
         }
     };
     
+    private BroadcastReceiver onConnectionStatus = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+        	boolean connected = intent.getAction().equals(Intents.CONNECTED);
+        	setConnectionStatus(connected);
+        }
+    };
+    
+    public void setConnectionStatus(boolean connected) {
+    	if (connectionStatusView != null) {
+    		connectionStatusView.findViewById(R.id.connection_status_color).setBackgroundColor(getResources().getColor(connected ? R.color.status_connected : R.color.status_disconnected));
+    		((TextView) connectionStatusView.findViewById(R.id.connection_status_text)).setText(connected ? R.string.status_connected : R.string.status_disconnected);
+    	}
+    }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.arena, menu);
-        return true;
+        connectionStatusView = menu.findItem(R.id.connection_status).getActionView();
+        return super.onCreateOptionsMenu(menu);
     }
     
     @Override

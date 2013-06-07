@@ -14,6 +14,9 @@ public class Intents {
 	public static final String TEST_SYSTEM = PREFIX + "TEST_SYSTEM";
 	public static final String STOP = PREFIX + "STOP";
 	public static final String CONNECT = PREFIX + "CONNECT";
+	public static final String CONNECTED = PREFIX + "CONNECTED";
+	public static final String NOT_CONNECTED = PREFIX + "NOT_CONNECTED";
+	public static final String CHECK_CONNECTION_STATUS = PREFIX + "CHECK_CONNECTION_STATUS";
 	public static final String REFRESH = PREFIX + "REFRESH";
 	public static final String TOUCH_EMITTER = PREFIX + "TOUCH_EMITTER";
 	public static final String EVENT_FIRE_EMITTER_CHANGED = PREFIX + "FIRE_EMITTER_CHANGED";

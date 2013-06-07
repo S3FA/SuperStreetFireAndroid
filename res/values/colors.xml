@@ -22,4 +22,7 @@
 	<color name="color_pallet_active">#fff</color>
 	
 	<color name="transparent">#00000000</color>
+	
+	<color name="status_connected">#00f</color>
+	<color name="status_disconnected">#f00</color>
 </resources>
