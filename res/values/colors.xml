@@ -10,9 +10,9 @@
 	<color name="focusbar">#a0f</color>
 	<color name="meditationbar">#f0a</color>
 	
-	<color name="ringmaster">#00f</color>
-	<color name="player_one">#0f0</color>
-	<color name="player_two">#f00</color>
+	<color name="ringmaster">#f00</color>
+	<color name="player_one">#00f</color>
+	<color name="player_two">#0f0</color>
 	
 	<color name="round_border">#00000000</color>
 	<color name="round_border_active">#aaa</color>
