@@ -32,7 +32,7 @@ import ca.site3.ssf.gamemodel.RoundEndedEvent;
 import ca.site3.ssf.gamemodel.RoundPlayTimerChangedEvent;
 
 public class ArenaFragment extends Fragment {
-	private static String LOG_TAG = "ssf";
+	private static String LOG_TAG = ArenaFragment.class.getName();
 
 	// TODO devices connect w/ battery status
 	// Battery status - is this in the IOServer yet?

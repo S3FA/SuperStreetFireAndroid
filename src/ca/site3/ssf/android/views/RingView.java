@@ -13,11 +13,10 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import ca.site3.ssf.android.R;
-import ca.site3.ssf.gamemodel.FireEmitter.Location;
 import ca.site3.ssf.gamemodel.FireEmitter;
+import ca.site3.ssf.gamemodel.FireEmitter.Location;
 import ca.site3.ssf.gamemodel.FireEmitterChangedEvent;
 import ca.site3.ssf.gamemodel.IGameModel.Entity;
-import ca.site3.ssf.guiprotocol.Event.GameEvent.FireEmitterType;
 
 /**
  * Displays the Ring and player health bars
@@ -60,6 +59,8 @@ public class RingView extends SurfaceView {
 	public boolean isInDrawMode = false;
 	
 	public OnEmitterTouch onEmitterTouch;
+	
+	public static final String LOG_TAG = RingView.class.getName();
 	
 	public RingView(Context context) {
 		super(context);
