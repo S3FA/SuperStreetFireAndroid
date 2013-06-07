@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
+/**
+ * Shows some text that could be helpful for the Master of Games during their performance
+ *
+ */
 public class TextFragment extends Fragment {
 	WebView text;
 	

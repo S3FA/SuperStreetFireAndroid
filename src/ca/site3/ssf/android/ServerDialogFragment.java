@@ -1,6 +1,5 @@
 package ca.site3.ssf.android;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +15,11 @@ import android.widget.TextView;
 
 import ca.site3.ssf.android.R;
 
+/**
+ * Shows a dialog where you can enter the SSF server's IP and save them to settings.
+ * Also asks for the application to connect.
+ *
+ */
 public class ServerDialogFragment extends DialogFragment {
 	
 	SharedPreferences prefs;
@@ -25,7 +29,6 @@ public class ServerDialogFragment extends DialogFragment {
 		View view = inflater.inflate(R.layout.debug, null);
 		
 		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
-		//getActivity().getSharedPreferences(SSFApplication.PREFS, Activity.MODE_PRIVATE);
 		
 		getDialog().setTitle("Connect to Server");
 
