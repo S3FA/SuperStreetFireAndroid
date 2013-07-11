@@ -93,8 +93,11 @@ public class SSFActivity extends Activity {
 		filter.addAction(Intents.EVENT_PLAYER_BLOCK_ACTION);
 		filter.addAction(Intents.EVENT_TIMER_CHANGE);
 		filter.addAction(Intents.EVENT_GAME_INFO_REFRESH);
+		filter.addAction(Intents.EVENT_GAME_STATE_CHANGED);
+		filter.addAction(Intents.EVENT_ROUND_ENDED);
 		registerReceiver(onGameEvent, filter);
 
+		filter = new IntentFilter();
 		filter.addAction(Intents.EVENT_GAME_STATE_CHANGED);
 		filter.addAction(Intents.EVENT_ROUND_ENDED);
 		registerReceiver(askForRefresh, filter);
@@ -103,6 +106,7 @@ public class SSFActivity extends Activity {
 		filter.addAction(Intents.CONNECTED);
 		filter.addAction(Intents.NOT_CONNECTED);
 		registerReceiver(onConnectionStatus, filter);
+		
 		sendBroadcast(new Intent(Intents.REFRESH));
 
 		// Try to connect to the saved server when the application is opened
