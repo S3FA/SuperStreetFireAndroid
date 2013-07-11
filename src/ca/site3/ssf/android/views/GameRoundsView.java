@@ -94,6 +94,7 @@ public class GameRoundsView extends LinearLayout {
 			break;
 		case TIE:
 			// FIXME make tie image
+			colorView.setBackgroundDrawable(getResources().getDrawable(R.drawable.round_draw));
 			break;
 		}
 	}
