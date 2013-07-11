@@ -7,8 +7,7 @@
 	<color name="other_bg">#222</color>
 	<color name="healthbar">#7AE01B</color>
 	<color name="healthbar_text">#99ffffff</color>
-	<color name="focusbar">#a0f</color>
-	<color name="meditationbar">#f0a</color>
+	<color name="action_points">#a0f</color>
 	
 	<color name="ringmaster">#f00</color>
 	<color name="player_one">#00f</color>
@@ -23,6 +22,6 @@
 	
 	<color name="transparent">#00000000</color>
 	
-	<color name="status_connected">#00f</color>
+	<color name="status_connected">#0f0</color>
 	<color name="status_disconnected">#f00</color>
 </resources>

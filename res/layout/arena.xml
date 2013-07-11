@@ -24,7 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="140dp"
         android:typeface="monospace"
         />
     <TextView
@@ -49,56 +48,60 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         />
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="75dp"
-        >
-	    <TextView
-	        android:id="@+id/player_2_name"
+    <RelativeLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:layout_marginTop="45dp"
+	    android:layout_alignParentTop="true"
+	    >
+	    <LinearLayout
+	        android:orientation="vertical"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:textSize="30sp"
-	        />
-	    <TextView
-	        android:id="@+id/player_2_info"
+	        android:layout_alignParentLeft="true"
+	        >
+		    <TextView
+		        android:id="@+id/player_2_name"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textSize="30sp"
+		        />
+		    <TextView
+		        android:id="@+id/player_2_info"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textSize="30sp"
+		        />
+	    </LinearLayout>
+	    <LinearLayout
+	        android:orientation="vertical"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:textSize="30sp"
-	        />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="75dp"
-        android:gravity="right"
-        >
-	    <TextView
-	        android:id="@+id/player_1_name"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="30sp"
-	        />
-	    <TextView
-	        android:id="@+id/player_1_info"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="30sp"
-	        />
-    </LinearLayout>
+	        android:layout_alignParentRight="true"
+	        android:gravity="right"
+	        >
+		    <TextView
+		        android:id="@+id/player_1_name"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textSize="30sp"
+		        />
+		    <TextView
+		        android:id="@+id/player_1_info"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textSize="30sp"
+		        />
+	    </LinearLayout>
+    </RelativeLayout>
     <ca.site3.ssf.android.views.GameControlsView
         android:id="@+id/game_controls"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="0dp"
         />
 
     <ca.site3.ssf.android.views.NyanView

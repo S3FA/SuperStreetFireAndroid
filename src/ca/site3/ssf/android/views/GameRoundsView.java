@@ -1,12 +1,17 @@
 package ca.site3.ssf.android.views;
 
+import java.util.List;
+
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import ca.site3.ssf.android.ArenaFragment;
 import ca.site3.ssf.android.R;
 import ca.site3.ssf.gamemodel.RoundEndedEvent;
+import ca.site3.ssf.gamemodel.RoundEndedEvent.RoundResult;
 
 public class GameRoundsView extends LinearLayout {
 	private static final int numberRounds = 3;
@@ -14,6 +19,8 @@ public class GameRoundsView extends LinearLayout {
 
 	private View[] views;
 	private RoundEndedEvent.RoundResult[] roundResults;
+	
+	private static String LOG_TAG = GameRoundsView.class.getName();
 
 	// FIXME save the rounds state
 	public GameRoundsView(Context context, AttributeSet attrs) {
@@ -49,6 +56,17 @@ public class GameRoundsView extends LinearLayout {
 		updateCurrentRoundDisplay();
 	}
 	
+	public void setRounds(List<RoundResult> newRoundResults) {
+		clearRoundResults();
+		int i = 0;
+		for (RoundResult result : newRoundResults) {
+			handleRound(result, i);
+			i++;
+		}
+		currentRound = i + 1;
+		updateCurrentRoundDisplay();
+	}
+	
 	public void clearRoundResults() {
 		for (int i = 0; i < numberRounds; i++) {
 			views[i].findViewById(R.id.color).setBackgroundColor(getResources().getColor(R.color.round_background));
@@ -58,9 +76,16 @@ public class GameRoundsView extends LinearLayout {
 	}
 	
 	public void handleRoundEndedEvent(RoundEndedEvent event) {
-		roundResults[event.getRoundNumber() - 1] = event.getRoundResult();
-		View colorView = views[currentRound].findViewById(R.id.color);
-		switch (event.getRoundResult()) {
+		RoundResult roundResult = event.getRoundResult();
+		roundResults[event.getRoundNumber() - 1] = roundResult;
+		handleRound(roundResult, event.getRoundNumber() - 1);
+		currentRound++;
+		updateCurrentRoundDisplay();
+	}
+	
+	public void handleRound(RoundResult result, int roundNumber) {
+		View colorView = views[roundNumber].findViewById(R.id.color);
+		switch (result) {
 		case PLAYER1_VICTORY:
 			colorView.setBackgroundColor(getResources().getColor(R.color.player_one));
 			break;
@@ -71,8 +96,6 @@ public class GameRoundsView extends LinearLayout {
 			// FIXME make tie image
 			break;
 		}
-		currentRound++;
-		updateCurrentRoundDisplay();
 	}
 
 }

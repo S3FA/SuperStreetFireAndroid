@@ -23,7 +23,6 @@ public class GameControlsView extends LinearLayout {
 	Button nextStateButton2;
 	Button killButton;
 	Button pauseButton;
-	Button testSystem;
 	
 	/**
 	 * Emergency stop
@@ -74,12 +73,6 @@ public class GameControlsView extends LinearLayout {
 		pauseButton.setOnClickListener(onButtonClick);
 		pauseButton.setEnabled(false);
 		
-		testSystem = (Button)view.findViewById(R.id.test_system);
-		testSystem.setText(R.string.test_system);
-		testSystem.setTag(Intents.TEST_SYSTEM);
-		testSystem.setOnClickListener(onButtonClick);
-		testSystem.setEnabled(false);
-		
 		stopButton = (Button)view.findViewById(R.id.stop);
 		stopButton.setTag(Intents.STOP);
 		stopButton.setOnClickListener(onButtonClick);
@@ -112,7 +105,6 @@ public class GameControlsView extends LinearLayout {
 			assert(nextGoToStates != null);
 			assert(nextGoToStates.size() <= 2);
 			
-			testSystem.setEnabled(true);
 			killButton.setEnabled(true);
 			stopButton.setEnabled(true);
 			

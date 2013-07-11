@@ -7,19 +7,19 @@
     >
     <Button 
         android:id="@+id/next_state_1"
-        android:text="Enter Ringmaster State"
+        android:text="@string/enter_ringmaster_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
     <Button 
         android:id="@+id/next_state_2"
-        android:text="Test Round"
+        android:text="@string/test_round"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
     <Button 
         android:id="@+id/pause_toggle"
-        android:text="Pause"
+        android:text="@string/pause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
@@ -29,20 +29,14 @@
         android:layout_weight="1"
         />
     <Button 
-        android:id="@+id/test_system"
-        android:text="Test System"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-    <Button 
         android:id="@+id/kill_game"
-        android:text="Kill Game"
+        android:text="@string/kill_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
     <Button 
         android:id="@+id/stop"
-        android:text="STOP"
+        android:text="@string/stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />

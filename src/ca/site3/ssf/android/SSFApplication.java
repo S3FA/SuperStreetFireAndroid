@@ -39,6 +39,9 @@ public class SSFApplication extends Application {
 	public static final String PREF_SERVER_PORT = "server_port";
 	public static final int DEFAULT_PORT = 31337;
 	public static final String DEFAULT_IP = "192.168.100.10";
+	
+	/** timeout for the connection status */
+	PendingIntent pintent;
 
 	BlockingQueue<FireEmitterChangedEvent> fireEvents = new ArrayBlockingQueue<FireEmitterChangedEvent>(1024);
 
@@ -90,6 +93,9 @@ public class SSFApplication extends Application {
 		case PLAYER_HEALTH_CHANGED:
 			intent = new Intent(Intents.EVENT_PLAYER_HEALTH_CHANGE);
 			break;
+		case PLAYER_ACTION_POINTS_CHANGED:
+			intent = new Intent(Intents.EVENT_PLAYER_ACTION_POINTS_CHANGED);
+			break;
 		case ROUND_ENDED:
 			intent = new Intent(Intents.EVENT_ROUND_ENDED);
 			break;
@@ -127,17 +133,25 @@ public class SSFApplication extends Application {
 		registerReceiver(onGamemasterAction, filter);
 		registerReceiver(checkConnectionStatus, new IntentFilter(
 				Intents.CHECK_CONNECTION_STATUS));
-		startTimeout();
 	}
-
+	
 	public void startTimeout() {
-		PendingIntent pintent = PendingIntent.getBroadcast(this, 0, new Intent(
-				Intents.CHECK_CONNECTION_STATUS), 0);
+		if (pintent == null) {
+			pintent = PendingIntent.getBroadcast(this, 0, new Intent(
+					Intents.CHECK_CONNECTION_STATUS), 0);
+			AlarmManager manager = (AlarmManager) (this
+					.getSystemService(Context.ALARM_SERVICE));
+			manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+					SystemClock.elapsedRealtime() + connectionHeartbeatTimout,
+					connectionHeartbeatTimout, pintent);
+		}
+	}
+	
+	public void stopTimeout() {
 		AlarmManager manager = (AlarmManager) (this
 				.getSystemService(Context.ALARM_SERVICE));
-		manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-				SystemClock.elapsedRealtime() + connectionHeartbeatTimout,
-				connectionHeartbeatTimout, pintent);
+		manager.cancel(pintent);
+		pintent = null;
 	}
 
 	private BroadcastReceiver checkConnectionStatus = new BroadcastReceiver() {

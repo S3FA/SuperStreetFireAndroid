@@ -17,6 +17,9 @@
     <string name="kill_game">Kill Game</string>
     <string name="pause">Pause</string>
     <string name="test_system">Test System</string>
+    <string name="enter_ringmaster_state">Enter Ringmaster State</string>
+    <string name="test_round">Test Round</string>
+    <string name="stop">STOP</string>
     
     <string name="connect">Connect</string>
     <string name="server_address">Server Address</string>

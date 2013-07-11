@@ -21,6 +21,7 @@ public class Intents {
 	public static final String TOUCH_EMITTER = PREFIX + "TOUCH_EMITTER";
 	public static final String EVENT_FIRE_EMITTER_CHANGED = PREFIX + "FIRE_EMITTER_CHANGED";
 	public static final String EVENT_PLAYER_HEALTH_CHANGE = PREFIX + "EVENT_PLAYER_HEALTH_CHANGE";
+	public static final String EVENT_PLAYER_ACTION_POINTS_CHANGED = PREFIX + "EVENT_PLAYER_ACTION_POINTS_CHANGED";
 	public static final String EVENT_TIMER_CHANGE = PREFIX + "EVENT_TIMER_CHANGE";
 	public static final String EVENT_ROUND_ENDED = PREFIX + "EVENT_ROUND_ENDED";
 	public static final String EVENT_TOUCH_FIRE_EMITTER = PREFIX + "EVENT_TOUCH_FIRE_EMITTER";

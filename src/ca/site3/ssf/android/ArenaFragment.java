@@ -25,6 +25,7 @@ import ca.site3.ssf.gamemodel.GameState;
 import ca.site3.ssf.gamemodel.GameStateChangedEvent;
 import ca.site3.ssf.gamemodel.IGameModel.Entity;
 import ca.site3.ssf.gamemodel.IGameModelEvent;
+import ca.site3.ssf.gamemodel.PlayerActionPointsChangedEvent;
 import ca.site3.ssf.gamemodel.PlayerAttackActionEvent;
 import ca.site3.ssf.gamemodel.PlayerBlockActionEvent;
 import ca.site3.ssf.gamemodel.PlayerHealthChangedEvent;
@@ -172,6 +173,11 @@ public class ArenaFragment extends Fragment {
 					.getNewLifePercentage();
 			ringView.invalidate();
 			break;
+		case PLAYER_ACTION_POINTS_CHANGED:
+			PlayerActionPointsChangedEvent actionPointEvent = (PlayerActionPointsChangedEvent) event;
+			ringView.playerActionPoints[actionPointEvent.getPlayerNum() - 1] = actionPointEvent.getNewActionPointAmt();
+			ringView.invalidate();
+			break;
 		case ROUND_PLAY_TIMER_CHANGED:
 			RoundPlayTimerChangedEvent roundEvent = (RoundPlayTimerChangedEvent) event;
 			updateTimer(roundEvent.getTimeInSecs());
@@ -187,6 +193,9 @@ public class ArenaFragment extends Fragment {
 			ringView.playerHealth[1] = refreshEvent.getPlayer2Health();
 			handleStateChange(refreshEvent.getCurrentGameState());
 			updateTimer(refreshEvent.getRoundInPlayTimer());
+			
+			roundsView.setRounds(refreshEvent.getCurrentRoundResults());
+			
 			ringView.postInvalidate();
 			break;
 		case PLAYER_BLOCK_ACTION:
