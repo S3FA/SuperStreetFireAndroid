@@ -17,16 +17,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        />
     <Button 
         android:id="@+id/pause_toggle"
         android:text="@string/pause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
-    <View
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
         />
     <Button 
         android:id="@+id/kill_game"
@@ -39,5 +39,6 @@
         android:text="@string/stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         />
 </LinearLayout>
