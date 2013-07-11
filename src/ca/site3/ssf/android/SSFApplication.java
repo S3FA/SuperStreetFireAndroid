@@ -38,7 +38,7 @@ public class SSFApplication extends Application {
 	public static final String PREF_SERVER_ADDRESS = "server_address";
 	public static final String PREF_SERVER_PORT = "server_port";
 	public static final int DEFAULT_PORT = 31337;
-	public static final String DEFAULT_IP = "192.168.100.10";
+	public static final String DEFAULT_IP = "192.168.100.2";
 	
 	/** timeout for the connection status */
 	PendingIntent pintent;
