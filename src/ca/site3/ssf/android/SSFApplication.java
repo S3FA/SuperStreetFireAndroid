@@ -157,11 +157,15 @@ public class SSFApplication extends Application {
 	private BroadcastReceiver checkConnectionStatus = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			sendBroadcast(new Intent(Intents.REFRESH));
+			
 			if (api != null && api.client != null) {
 				// FIXME api.client.isConnected() will return true even if the
 				// server is closed
 				if (api.client.isConnected()) {
 					sendBroadcast(new Intent(Intents.CONNECTED));
+				} else {
+					sendBroadcast(new Intent(Intents.NOT_CONNECTED));
 				}
 			} else {
 				sendBroadcast(new Intent(Intents.NOT_CONNECTED));
