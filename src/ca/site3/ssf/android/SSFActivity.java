@@ -118,6 +118,7 @@ public class SSFActivity extends Activity {
 	public void onPause() {
 		super.onPause();
 		unregisterReceiver(onGameEvent);
+		unregisterReceiver(askForRefresh);
 		unregisterReceiver(onConnectionStatus);
 		((SSFApplication) getApplication()).stopTimeout();
 	}
