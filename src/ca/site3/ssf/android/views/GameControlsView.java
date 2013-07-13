@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import ca.site3.ssf.android.Intents;
-import ca.site3.ssf.android.R;
-import ca.site3.ssf.gamemodel.GameState;
-import ca.site3.ssf.gamemodel.GameState.GameStateType;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import ca.site3.ssf.android.Intents;
+import ca.site3.ssf.android.R;
+import ca.site3.ssf.gamemodel.GameState;
+import ca.site3.ssf.gamemodel.GameState.GameStateType;
 
 public class GameControlsView extends LinearLayout {
 	public OnPlayerActionSelect onPlayerActionSelect;
