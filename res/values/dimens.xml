@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="player_info_margin_top">45dp</dimen>
+	
+	<dimen name="round_indicator">30dp</dimen>
+	<dimen name="round_indicator_border">4dp</dimen>
+	<dimen name="round_indicator_padding">4dp</dimen>
+	
+	<dimen name="color_pallet_text">20sp</dimen>
+	
+	<dimen name="round_timer_padding_top">40dp</dimen>
+</resources>

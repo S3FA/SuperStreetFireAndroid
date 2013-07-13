@@ -26,6 +26,9 @@ import ca.site3.ssf.gamemodel.IGameModel.Entity;
 public class RingView extends SurfaceView {
 	static int num_effects_in_ring = 16;
 	static int num_row_effect_length = 8;
+	
+	static final int healthTextSize = 35;
+	static final int healthTextShadowOffset = 2;
 
 	List<Emitter> emitters;
 
@@ -36,9 +39,11 @@ public class RingView extends SurfaceView {
 	Paint arenaBackground;
 	Paint paintHealthBackground;
 	Paint paintHealthText;
+	Paint paintHealthTextShadow;
 	Paint paintOtherBackground;
 	Paint paintHealth;
 	Paint paintActionPoints;
+	Paint paintEmitterOutline;
 
 	DecimalFormat percent = new DecimalFormat("#%");
 
@@ -138,7 +143,15 @@ public class RingView extends SurfaceView {
 
 		paintHealthText = new Paint();
 		paintHealthText.setColor(getResources().getColor(R.color.healthbar_text));
-		paintHealthText.setTextSize(35);
+		paintHealthText.setTextSize(healthTextSize);
+		paintHealthText.setAntiAlias(true);
+		paintHealthText.setTextAlign(Paint.Align.CENTER);
+		
+		paintHealthTextShadow = new Paint();
+		paintHealthTextShadow.setColor(getResources().getColor(R.color.healthbar_text_shadow));
+		paintHealthTextShadow.setTextSize(healthTextSize);
+		paintHealthTextShadow.setAntiAlias(true);
+		paintHealthTextShadow.setTextAlign(Paint.Align.CENTER);
 
 		paintHealth = new Paint();
 		paintHealth.setColor(getResources().getColor(R.color.healthbar));
@@ -151,6 +164,12 @@ public class RingView extends SurfaceView {
 		paintOtherBackground = new Paint();
 		paintOtherBackground.setColor(getResources().getColor(R.color.other_bg));
 		paintOtherBackground.setAntiAlias(true);
+		
+		paintEmitterOutline = new Paint();
+		paintEmitterOutline.setColor(getResources().getColor(
+				R.color.emitter_outline));
+		paintEmitterOutline.setStyle(Paint.Style.STROKE);
+		paintEmitterOutline.setAntiAlias(true);
 	}
 
 	@Override
@@ -160,7 +179,7 @@ public class RingView extends SurfaceView {
 		ringY = (int) Math.floor((getHeight() / 2 + (Math.min(getHeight(),
 				getWidth()) * .055)));
 
-		// The ring is 85% of the min length
+		// The ring is 85% of the smaller dimension
 		ringD = (int) (Math.min(getHeight(), getWidth()) * .85) / 2;
 
 		// this generally looks pretty sane
@@ -174,12 +193,6 @@ public class RingView extends SurfaceView {
 
 		drawHealthbars(canvas);
 
-		Paint paintEmitterOutline = new Paint();
-		paintEmitterOutline.setColor(getResources().getColor(
-				R.color.emitter_outline));
-		paintEmitterOutline.setStyle(Paint.Style.STROKE);
-		paintEmitterOutline.setAntiAlias(true);
-
 		Paint paintEmitterFill = new Paint();
 		paintEmitterFill.setStyle(Paint.Style.FILL);
 		paintEmitterFill.setColor(getResources().getColor(selectedColor));
@@ -190,9 +203,9 @@ public class RingView extends SurfaceView {
 			canvas.drawCircle(ringX + emitter.x, ringY + emitter.y, emitterRadius,
 					paintEmitterFill);
 			if (emitter.touching) {
-				paintEmitterOutline.setStrokeWidth(2);
+				paintEmitterOutline.setStrokeWidth(3);
 			} else {
-				paintEmitterOutline.setStrokeWidth(1);
+				paintEmitterOutline.setStrokeWidth(2);
 			}
 			canvas.drawCircle(ringX + emitter.x, ringY + emitter.y, emitterRadius,
 					paintEmitterOutline);
@@ -220,8 +233,13 @@ public class RingView extends SurfaceView {
 		path.lineTo((healthbarWidth * playerHealth[1] / 100), healthbarHeigth);
 		path.lineTo(0, healthbarHeigth);
 		canvas.drawPath(path, paintHealth);
+	  // health text shadow
 		canvas.drawText(percent.format(playerHealth[1] / 100),
-				(healthbarWidth / 2) - 20, healthbarHeigth - (healthbarHeigth / 4),
+				(healthbarWidth / 2), healthbarHeigth - (healthbarHeigth / 4) + healthTextShadowOffset,
+				paintHealthTextShadow);
+	  // health text shadow
+		canvas.drawText(percent.format(playerHealth[1] / 100),
+				(healthbarWidth / 2), healthbarHeigth - (healthbarHeigth / 4),
 				paintHealthText);
 		
 		float actionBarYOffset = healthbarHeigth;
@@ -276,8 +294,13 @@ public class RingView extends SurfaceView {
 				healthbarHeigth);
 		path.lineTo(getWidth(), healthbarHeigth);
 		canvas.drawPath(path, paintHealth);
+		// health text shadow
 		canvas.drawText(percent.format(playerHealth[0] / 100), getWidth()
-				- (healthbarWidth / 2) - 20, healthbarHeigth - (healthbarHeigth / 4),
+				- (healthbarWidth / 2), healthbarHeigth - (healthbarHeigth / 4) + healthTextShadowOffset,
+				paintHealthTextShadow);
+	  // health text
+		canvas.drawText(percent.format(playerHealth[0] / 100), getWidth()
+				- (healthbarWidth / 2), healthbarHeigth - (healthbarHeigth / 4),
 				paintHealthText);
 	}
 

@@ -8,8 +8,7 @@
     android:paddingBottom="10dp"
     android:paddingRight="10dp"
     >
-    <TextView 
-        android:text="Color"
+    <TextView
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -17,6 +16,7 @@
         android:gravity="right"
         android:paddingRight="10dp"
         android:textColor="@color/color_pallet_inactive"
+        android:textSize="@dimen/color_pallet_text"
         />
     <View
         android:id="@+id/color"

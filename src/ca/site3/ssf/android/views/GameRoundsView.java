@@ -4,17 +4,15 @@ import java.util.List;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-import ca.site3.ssf.android.ArenaFragment;
 import ca.site3.ssf.android.R;
 import ca.site3.ssf.gamemodel.RoundEndedEvent;
 import ca.site3.ssf.gamemodel.RoundEndedEvent.RoundResult;
 
 public class GameRoundsView extends LinearLayout {
-	private static final int numberRounds = 3;
+	private static final int NUM_ROUNDS = 3;
 	public int currentRound = 1;
 
 	private View[] views;
@@ -22,7 +20,6 @@ public class GameRoundsView extends LinearLayout {
 	
 	private static String LOG_TAG = GameRoundsView.class.getName();
 
-	// FIXME save the rounds state
 	public GameRoundsView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
@@ -31,23 +28,21 @@ public class GameRoundsView extends LinearLayout {
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
-		roundResults = new RoundEndedEvent.RoundResult[numberRounds];
-		views = new View[numberRounds];
+		roundResults = new RoundEndedEvent.RoundResult[NUM_ROUNDS];
+		views = new View[NUM_ROUNDS];
 		
-		for (int i = 0; i < numberRounds; i++) {
+		for (int i = 0; i < NUM_ROUNDS; i++) {
 			views[i] = inflater.inflate(R.layout.game_round, null);
-			
-			views[i].findViewById(R.id.border).setBackgroundColor(getResources().getColor(
-					i == currentRound - 1 ? R.color.round_border_active : R.color.transparent));
-			
+
 			this.addView(views[i]);
 		}
+		
+		updateCurrentRoundDisplay();
 	}
 	
 	private void updateCurrentRoundDisplay() {
-		for (int i = 0; i < numberRounds; i++) {
-			views[i].findViewById(R.id.border).setBackgroundColor(getResources().getColor(
-					i == currentRound - 1 ? R.color.round_border_active : R.color.transparent));
+		for (int i = 0; i < NUM_ROUNDS; i++) {
+			views[i].findViewById(R.id.border).setBackgroundResource(i == currentRound - 1 ? R.drawable.round_item_active_bg : R.drawable.round_item_bg);
 		}
 	}
 	
@@ -68,11 +63,11 @@ public class GameRoundsView extends LinearLayout {
 	}
 	
 	public void clearRoundResults() {
-		for (int i = 0; i < numberRounds; i++) {
-			views[i].findViewById(R.id.color).setBackgroundColor(getResources().getColor(R.color.round_background));
-			views[i].findViewById(R.id.border).setBackgroundColor(getResources().getColor(R.color.transparent));
+		for (int i = 0; i < NUM_ROUNDS; i++) {
+			views[i].findViewById(R.id.color).setBackgroundResource(R.drawable.round_item_none);
+			views[i].findViewById(R.id.border).setBackgroundResource(R.drawable.round_item_bg);
 		}
-		roundResults = new RoundEndedEvent.RoundResult[numberRounds];
+		roundResults = new RoundEndedEvent.RoundResult[NUM_ROUNDS];
 	}
 	
 	public void handleRoundEndedEvent(RoundEndedEvent event) {
@@ -87,14 +82,13 @@ public class GameRoundsView extends LinearLayout {
 		View colorView = views[roundNumber].findViewById(R.id.color);
 		switch (result) {
 		case PLAYER1_VICTORY:
-			colorView.setBackgroundColor(getResources().getColor(R.color.player_one));
+			colorView.setBackgroundResource(R.drawable.round_item_one);
 			break;
 		case PLAYER2_VICTORY:
-			colorView.setBackgroundColor(getResources().getColor(R.color.player_two));
+			colorView.setBackgroundResource(R.drawable.round_item_two);
 			break;
 		case TIE:
-			// FIXME make tie image
-			colorView.setBackgroundDrawable(getResources().getDrawable(R.drawable.round_draw));
+			colorView.setBackgroundResource(R.drawable.round_item_tie);
 			break;
 		}
 	}

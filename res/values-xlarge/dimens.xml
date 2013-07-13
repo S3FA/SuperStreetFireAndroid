@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="player_info_margin_top">60dp</dimen>
+	
+	<dimen name="round_indicator">45dp</dimen>
+	
+	<dimen name="round_timer_padding_top">55dp</dimen>
+</resources>
