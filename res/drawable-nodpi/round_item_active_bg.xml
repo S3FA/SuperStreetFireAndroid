@@ -4,5 +4,6 @@
     <size
         android:width="@dimen/round_indicator"
         android:height="@dimen/round_indicator" />
-    <solid android:color="@color/round_border_active" />
+    <solid
+        android:color="@color/round_border_active" />
 </shape>

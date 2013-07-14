@@ -4,9 +4,6 @@
     <size
         android:width="@dimen/round_indicator"
         android:height="@dimen/round_indicator" />
-    <stroke
-        android:width="2dp"
-        color="@color/round_border" />
     <solid
         android:color="@color/player_two" />
 </shape>

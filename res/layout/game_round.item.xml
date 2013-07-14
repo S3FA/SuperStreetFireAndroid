@@ -17,6 +17,7 @@
 	        android:id="@+id/color"
 	        android:layout_width="@dimen/round_indicator"
 	        android:layout_height="@dimen/round_indicator"
+	        android:background="@drawable/round_item_none"
 	        />
         </RelativeLayout>
 </FrameLayout>

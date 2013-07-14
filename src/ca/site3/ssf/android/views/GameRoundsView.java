@@ -12,7 +12,7 @@ import ca.site3.ssf.gamemodel.RoundEndedEvent;
 import ca.site3.ssf.gamemodel.RoundEndedEvent.RoundResult;
 
 public class GameRoundsView extends LinearLayout {
-	private static final int NUM_ROUNDS = 3;
+	private static final int DEFAULT_NUM_ROUNDS = 3;
 	public int currentRound = 1;
 
 	private View[] views;
@@ -25,23 +25,28 @@ public class GameRoundsView extends LinearLayout {
 		
 		this.setOrientation(HORIZONTAL);
 		
-		LayoutInflater inflater = (LayoutInflater) context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		roundResults = new RoundEndedEvent.RoundResult[DEFAULT_NUM_ROUNDS];
 		
-		roundResults = new RoundEndedEvent.RoundResult[NUM_ROUNDS];
-		views = new View[NUM_ROUNDS];
-		
-		for (int i = 0; i < NUM_ROUNDS; i++) {
-			views[i] = inflater.inflate(R.layout.game_round, null);
-
-			this.addView(views[i]);
-		}
+		addViews();
 		
 		updateCurrentRoundDisplay();
 	}
 	
+	private void addViews() {
+		views = new View[DEFAULT_NUM_ROUNDS];
+		
+		LayoutInflater inflater = (LayoutInflater) getContext()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		
+		for (int i = 0; i < DEFAULT_NUM_ROUNDS; i++) {
+			views[i] = inflater.inflate(R.layout.game_round, null);
+
+			this.addView(views[i]);
+		}
+	}
+	
 	private void updateCurrentRoundDisplay() {
-		for (int i = 0; i < NUM_ROUNDS; i++) {
+		for (int i = 0; i < DEFAULT_NUM_ROUNDS; i++) {
 			views[i].findViewById(R.id.border).setBackgroundResource(i == currentRound - 1 ? R.drawable.round_item_active_bg : R.drawable.round_item_bg);
 		}
 	}
@@ -63,11 +68,10 @@ public class GameRoundsView extends LinearLayout {
 	}
 	
 	public void clearRoundResults() {
-		for (int i = 0; i < NUM_ROUNDS; i++) {
-			views[i].findViewById(R.id.color).setBackgroundResource(R.drawable.round_item_none);
-			views[i].findViewById(R.id.border).setBackgroundResource(R.drawable.round_item_bg);
-		}
-		roundResults = new RoundEndedEvent.RoundResult[NUM_ROUNDS];
+		this.removeAllViews();
+		roundResults = new RoundEndedEvent.RoundResult[DEFAULT_NUM_ROUNDS];
+		currentRound = -1;
+		addViews();
 	}
 	
 	public void handleRoundEndedEvent(RoundEndedEvent event) {
@@ -79,6 +83,8 @@ public class GameRoundsView extends LinearLayout {
 	}
 	
 	public void handleRound(RoundResult result, int roundNumber) {
+		if (roundNumber > views.length) { return; }
+		
 		View colorView = views[roundNumber].findViewById(R.id.color);
 		switch (result) {
 		case PLAYER1_VICTORY:
