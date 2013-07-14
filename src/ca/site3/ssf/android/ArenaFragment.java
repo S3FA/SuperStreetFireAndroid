@@ -191,6 +191,10 @@ public class ArenaFragment extends Fragment {
 			}
 			ringView.playerHealth[0] = refreshEvent.getPlayer1Health();
 			ringView.playerHealth[1] = refreshEvent.getPlayer2Health();
+			
+			ringView.playerActionPoints[0] = refreshEvent.getPlayer1ActionPoints();
+			ringView.playerActionPoints[1] = refreshEvent.getPlayer2ActionPoints();
+			
 			handleStateChange(refreshEvent.getCurrentGameState());
 			updateTimer(refreshEvent.getRoundInPlayTimer());
 			
